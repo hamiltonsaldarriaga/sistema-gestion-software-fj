@@ -155,16 +155,16 @@ def ejecutar_pruebas():
         except Exception as error:
             print(f"PRUEBA 10 FALLIDA: {error}")
 
-        # PRUEBA ADICIONAL: Intento de reserva con cliente inexistente.
+        # PRUEBA ADICIONAL: Intento de crear una reserva fallida.
         try:
-            cliente_inexistente = sistema.buscar_cliente("9999")
-            print(cliente_inexistente)
+            sistema.crear_reserva("R003", "9999", "S001", 2)
+            print("No se detecto el cliente inexistente.")
 
         except Exception as error:
             operaciones += 1
             print(
-                "PRUEBA ADICIONAL: Error por cliente inexistente "
-                f"controlado: {error}"
+                "PRUEBA ADICIONAL: Reserva fallida controlada: "
+                f"{error}"
             )
 
         # Mostrar resultados finales.
