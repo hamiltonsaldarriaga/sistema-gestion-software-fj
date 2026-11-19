@@ -125,15 +125,9 @@ def ejecutar_pruebas():
             operaciones += 1
             print(f"PRUEBA 7: Error controlado correctamente: {error}")
 
-        # PRUEBA 8: Creacion de una reserva valida.
+       # PRUEBA 8: Creacion de una reserva valida.
         try:
-            reserva1 = Reserva(
-                "R001",
-                sistema.buscar_cliente("1001"),
-                sistema.buscar_servicio("S001"),
-                2
-            )
-            sistema.crear_reserva(reserva1)
+            sistema.crear_reserva("R001", "1001", "S001", 2)
             operaciones += 1
             print("PRUEBA 8: Reserva creada correctamente.")
 
@@ -151,15 +145,9 @@ def ejecutar_pruebas():
         except Exception as error:
             print(f"PRUEBA 9 FALLIDA: {error}")
 
-        # PRUEBA 10: Creacion y cancelacion de otra reserva.
+       # PRUEBA 10: Creacion y cancelacion de otra reserva.
         try:
-            reserva2 = Reserva(
-                "R002",
-                sistema.buscar_cliente("1002"),
-                sistema.buscar_servicio("S002"),
-                3
-            )
-            sistema.crear_reserva(reserva2)
+            sistema.crear_reserva("R002", "1002", "S002", 3)
             sistema.cancelar_reserva("R002")
             operaciones += 1
             print("PRUEBA 10: Reserva creada y cancelada.")
