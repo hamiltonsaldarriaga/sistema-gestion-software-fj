@@ -94,14 +94,12 @@ def ejecutar_sistema():
                     id_servicio = input("Codigo del servicio: ")
                     duracion = float(input("Duracion: "))
 
-                    cliente = sistema.buscar_cliente(id_cliente)
-                    servicio = sistema.buscar_servicio(id_servicio)
-
-                    reserva = Reserva(
-                        identificador, cliente, servicio, duracion
+                    sistema.crear_reserva(
+                        identificador,
+                        id_cliente,
+                        id_servicio,
+                        duracion
                     )
-
-                    sistema.crear_reserva(reserva)
                     print("Reserva creada correctamente.")
 
                 elif opcion == "4":
