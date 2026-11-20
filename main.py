@@ -94,11 +94,12 @@ def ejecutar_sistema():
                     id_servicio = input("Codigo del servicio: ")
                     duracion = float(input("Duracion: "))
 
+
                     sistema.crear_reserva(
-                        identificador,
-                        id_cliente,
-                        id_servicio,
-                        duracion
+                     identificador,
+                    id_cliente,
+                    id_servicio,
+                      duracion
                     )
                     print("Reserva creada correctamente.")
 
@@ -144,6 +145,10 @@ def ejecutar_sistema():
 
                 else:
                     print("Opcion no valida. Intente nuevamente.")
+
+            except EOFError:
+                print("\nEntrada finalizada. Cerrando el sistema...")
+                break
 
             except (ValueError, TypeError) as error:
                 print(f"Error en los datos ingresados: {error}")
