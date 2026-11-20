@@ -125,7 +125,7 @@ def ejecutar_pruebas():
             operaciones += 1
             print(f"PRUEBA 7: Error controlado correctamente: {error}")
 
-       # PRUEBA 8: Creacion de una reserva valida.
+        # PRUEBA 8: Creacion de una reserva valida.
         try:
             sistema.crear_reserva("R001", "1001", "S001", 2)
             operaciones += 1
@@ -145,7 +145,7 @@ def ejecutar_pruebas():
         except Exception as error:
             print(f"PRUEBA 9 FALLIDA: {error}")
 
-       # PRUEBA 10: Creacion y cancelacion de otra reserva.
+        # PRUEBA 10: Creacion y cancelacion de otra reserva.
         try:
             sistema.crear_reserva("R002", "1002", "S002", 3)
             sistema.cancelar_reserva("R002")
@@ -166,6 +166,115 @@ def ejecutar_pruebas():
                 "PRUEBA ADICIONAL: Reserva fallida controlada: "
                 f"{error}"
             )
+
+        # PRUEBA 12: Intento de crear una reserva con duracion negativa.
+        try:
+            sistema.crear_reserva("R004", "1001", "S001", -2)
+            print("PRUEBA 12: No se detecto la duracion negativa.")
+
+        except Exception as error:
+            operaciones += 1
+            print(f"PRUEBA 12: Duracion negativa controlada: {error}")
+
+        # PRUEBA 13: Intento de utilizar un servicio inexistente.
+        try:
+            sistema.crear_reserva("R005", "1001", "S999", 2)
+            print("PRUEBA 13: No se detecto el servicio inexistente.")
+
+        except Exception as error:
+            operaciones += 1
+            print(f"PRUEBA 13: Servicio inexistente controlado: {error}")
+
+        # PRUEBA 14: Intento de crear una reserva sin identificador.
+        try:
+            sistema.crear_reserva("", "1001", "S001", 2)
+            print("PRUEBA 14: No se detecto el identificador vacio.")
+
+        except Exception as error:
+            operaciones += 1
+            print(f"PRUEBA 14: Identificador incorrecto controlado: {error}")
+
+        # PRUEBA 15: Crear una reserva para probar estados incorrectos.
+        try:
+            sistema.crear_reserva("R006", "1001", "S001", 2)
+            operaciones += 1
+            print("PRUEBA 15: Reserva creada para pruebas de estado.")
+
+        except Exception as error:
+            print(f"PRUEBA 15 FALLIDA: {error}")
+
+        # PRUEBA 16: Intentar procesar una reserva sin confirmarla.
+        try:
+            sistema.procesar_reserva("R006", 0, 19)
+            print("PRUEBA 16: No se detecto la reserva sin confirmar.")
+
+        except Exception as error:
+            operaciones += 1
+            print(f"PRUEBA 16: Procesamiento sin confirmar controlado: {error}")
+
+        # PRUEBA 17: Confirmar la reserva R006.
+        try:
+            sistema.confirmar_reserva("R006")
+            operaciones += 1
+            print("PRUEBA 17: Reserva confirmada correctamente.")
+
+        except Exception as error:
+            print(f"PRUEBA 17 FALLIDA: {error}")
+
+        # PRUEBA 18: Intentar aplicar un descuento superior al 100%.
+        try:
+            sistema.procesar_reserva("R006", 150, 19)
+            print("PRUEBA 18: No se detecto el descuento fuera de rango.")
+
+        except Exception as error:
+            operaciones += 1
+            print(f"PRUEBA 18: Descuento fuera de rango controlado: {error}")
+
+        # PRUEBA 19: Procesar correctamente la reserva R006.
+        try:
+            total_r006 = sistema.procesar_reserva("R006", 10, 19)
+            operaciones += 1
+            print("PRUEBA 19: Reserva procesada correctamente.")
+            print(f"Total calculado: ${total_r006:,.2f}")
+
+        except Exception as error:
+            print(f"PRUEBA 19 FALLIDA: {error}")
+
+        # PRUEBA 20: Intentar procesar nuevamente una reserva procesada.
+        try:
+            sistema.procesar_reserva("R006", 0, 19)
+            print("PRUEBA 20: No se detecto el procesamiento duplicado.")
+
+        except Exception as error:
+            operaciones += 1
+            print(f"PRUEBA 20: Procesamiento duplicado controlado: {error}")
+
+        # PRUEBA 21: Intentar cancelar una reserva procesada.
+        try:
+            sistema.cancelar_reserva("R006")
+            print("PRUEBA 21: No se detecto la cancelacion de una reserva procesada.")
+
+        except Exception as error:
+            operaciones += 1
+            print(f"PRUEBA 21: Cancelacion no permitida controlada: {error}")
+
+        # PRUEBA 22: Intentar cancelar una reserva inexistente.
+        try:
+            sistema.cancelar_reserva("R999")
+            print("PRUEBA 22: No se detecto la reserva inexistente.")
+
+        except Exception as error:
+            operaciones += 1
+            print(f"PRUEBA 22: Cancelacion inexistente controlada: {error}")
+
+        # PRUEBA 23: Intentar crear una reserva con parametros faltantes.
+        try:
+            sistema.crear_reserva("R007", "1001", "S001")
+            print("PRUEBA 23: No se detectaron los parametros faltantes.")
+
+        except Exception as error:
+            operaciones += 1
+            print(f"PRUEBA 23: Parametros faltantes controlados: {error}")
 
         # Mostrar resultados finales.
         print("\n========================================")
